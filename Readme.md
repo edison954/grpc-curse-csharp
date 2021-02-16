@@ -127,7 +127,9 @@ Security in grpc
 
 grpc vs Rest Api 
 --------------------------
+
 GRPC										|REST
+----------------------------------------	|---------------------------------------
 Protocol buffers - smaller, faster 			|Json - text based, slower, bigger
 http/2 (lower latency) - from 2015			|http1.1 (higher latency) from 1997
 Bidirectional & Async						|Client => Server requests only
