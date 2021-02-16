@@ -127,17 +127,17 @@ Security in grpc
 
 grpc vs Rest Api 
 --------------------------
-GRPC										REST
-Protocol buffers - smaller, faster 			Json - text based, slower, bigger
-http/2 (lower latency) - from 2015			http1.1 (higher latency) from 1997
-Bidirectional & Async						Client => Server requests only
-Steam supports								Request / Response support only
-Api oriented - "what"						CRUD oriented (created-retrieve-update-delete/
- (no constraints - free design)				 post, get, put, delete)
-Code generation through protocol buffer		Code generation through OpenAPi /swagger
- in anny language							 (add-on)
-RPC based - grpc does the plumbing for use	HTTP verbs based - we have to write the porque
-											 or use a third party library
+GRPC										|REST
+Protocol buffers - smaller, faster 			|Json - text based, slower, bigger
+http/2 (lower latency) - from 2015			|http1.1 (higher latency) from 1997
+Bidirectional & Async						|Client => Server requests only
+Steam supports								|Request / Response support only
+Api oriented - "what"						|CRUD oriented (created-retrieve-update-delete/
+ (no constraints - free design)				| post, get, put, delete)
+Code generation through protocol buffer		|Code generation through OpenAPi /swagger
+ in anny language							| (add-on)
+RPC based - grpc does the plumbing for use	|HTTP verbs based - we have to write the porque
+											| or use a third party library
 
 
 https;//husebee.github.io/golang/rest/grpc/2016/05/28/golang-rest-v-grpc.html
