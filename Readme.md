@@ -138,8 +138,7 @@ Api oriented - "what"						|CRUD oriented (created-retrieve-update-delete/
  (no constraints - free design)				| post, get, put, delete)
 Code generation through protocol buffer		|Code generation through OpenAPi /swagger
  in anny language							| (add-on)
-RPC based - grpc does the plumbing for use	|HTTP verbs based - we have to write the porque
-											| or use a third party library
+RPC based - grpc does the plumbing for use	|HTTP verbs based - we have to write the porque or use a third party library
 
 
 https;//husebee.github.io/golang/rest/grpc/2016/05/28/golang-rest-v-grpc.html
