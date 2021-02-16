@@ -150,3 +150,7 @@ Summary: why use grpc
 - ssl security is built in
 - support for streaming apis for maximum performance
 - grpc is api oriented, instead of resource oriented like rest
+
+demos:
+http://www.http2demo.io/
+https://imagekit.io/demo/http2-vs-http1
