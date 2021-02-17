@@ -23,6 +23,7 @@ namespace client
 
             var client = new DummyService.DummyServiceClient(channel);
             channel.ShutdownAsync().Wait();
+            Console.ReadKey();
 
         }
     }
