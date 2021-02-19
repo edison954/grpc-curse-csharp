@@ -154,3 +154,21 @@ Summary: why use grpc
 demos:
 http://www.http2demo.io/
 https://imagekit.io/demo/http2-vs-http1
+
+
+----------------------------------
+----------------------------------
+
+Unary Api
+----------------------------------
+
+- are the basic Request/Response
+- The client will send one message to the server and will receive one response from the server
+- Unary RPC calls will be the most common for your apis
+	- are very well suited when your data is small
+	. start with unary when writing apis and use streaming api if performance is an issue
+- are defined using protocol buffers
+- for each rpc call we have to define a "Request" message and a "Response" message
+
+
+
