@@ -32,5 +32,18 @@ namespace server
             }
         }
 
+        // Client streaming
+        public override async Task<LongGreetResponse> LongGreet(IAsyncStreamReader<LongGreetRequest> requestStream, ServerCallContext context)
+        {
+            string result = "";
+            // en este caso esta retornando una respuesta unicamente cuando se terminan los mensajes del cliente, sin embargo la respuesta se puede retornar en cualquiem moment
+            while (await requestStream.MoveNext())
+            {
+                result += string.Format("Hello {0} {1} {2}", requestStream.Current.Greeting.FirstName, requestStream.Current.Greeting.LastName, Environment.NewLine);
+            }
+
+            return new LongGreetResponse() { Result = result };
+        }
+
     }
 }

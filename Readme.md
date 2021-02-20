@@ -183,7 +183,16 @@ Server Streaming API
 - In grpc serer streaming calls are defined using the keyword "stream"
 - as for each rpc call we have to define a "Request" message and a "Response" message.
 
-
+gRPC Streaming Client
+----------------------------------
+- client streaming rpc api are a new kind api enabled thanks to http/2
+- the client will send many message to the server and will receive one response from the server (at any time)
+- Streaming client are well suited for 
+	- when the client needs to sen a lot of data (big data)
+	- when the server processing is expensive and should happen as the client sends data
+	- when the client needs to push data to the server without really expecting a response
+- in grpc client streaming calls are defined using the keyword "stream"
+- as for each rpc call we have to define a "Request" message and a "Response" message.
 
 
 
