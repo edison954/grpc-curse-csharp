@@ -14,6 +14,9 @@ namespace server
         public override async Task<SqrtResponse> sqrt(SqrtRequest request, ServerCallContext context)
         {
 
+            //deadline
+            await Task.Delay(500);
+
             int number = request.Number;
             if (number >= 0)
                 return new SqrtResponse() { SquareRoot = Math.Sqrt(number) };

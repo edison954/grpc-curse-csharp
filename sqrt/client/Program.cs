@@ -26,8 +26,14 @@ namespace client
 
             try
             {
-                var response = client.sqrt(new SqrtRequest() { Number = number });
+                //var response = client.sqrt(new SqrtRequest() { Number = number });
+                //deadline
+                var response = client.sqrt(new SqrtRequest() { Number = number },
+                                            deadline: DateTime.UtcNow.AddMilliseconds(500));
                 Console.WriteLine(response.SquareRoot);
+            }
+            catch (RpcException e) when (e.StatusCode == StatusCode.DeadlineExceeded) {
+                Console.WriteLine("Error deadline : " + e.Status.Detail);
             }
             catch (RpcException e)
             {
