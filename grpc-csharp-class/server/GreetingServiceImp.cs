@@ -11,6 +11,7 @@ namespace server
 {
     public class GreetingServiceImpl: GreetingServiceBase
     {
+        // Unary
         public override Task<GreetingResponse> Greet(GreetingRequest request, ServerCallContext context)
         {
             string result = String.Format("Hello {0} {1}", request.Greeting.FirstName, request.Greeting.LastName);
@@ -18,6 +19,7 @@ namespace server
             return Task.FromResult(new GreetingResponse() { Result = result });
         }
 
+        // Server streaming
         public override async Task GreatManyTimes(GreetManyTimesRequest request, IServerStreamWriter<GreetManyTimesResponse> responseStream, ServerCallContext context)
         {
             Console.WriteLine("The server received the request : ");
