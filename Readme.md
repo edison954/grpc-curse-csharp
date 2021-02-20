@@ -205,3 +205,28 @@ gRPC Bi Directional Streaming (BiDi)
 	- long running connections
 - in grpc Bi directional streaming api are defined using the keyword "stream", twice
 - as for each rpc call we have to define a "Request" message and a "Response" message.
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+* Errors in gRPC
+Error codes
+-------------------
+- It is common for your api to sometimes return error codes
+- in http, there are many error codes
+	- 2xx for success
+	- 3xx for ...
+	- 4xx for ...
+	- 5xx for ...
+- while http codes are standardized they're not usually clear
+- with gRPC, there a few error codes:
+	https://grpc.io/docs/guides/error.html
+	https://grpc.io/docs/guides/error/
+- there is also a complete reference to implementation of error codes than close a lot of gaps with the documentation:
+	http://avi.im/grpc-errors
+- if an application needs to return extra information on top of an error code, it can use the metadata context.
+
+
+
+
