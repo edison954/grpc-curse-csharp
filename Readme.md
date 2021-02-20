@@ -194,5 +194,14 @@ gRPC Streaming Client
 - in grpc client streaming calls are defined using the keyword "stream"
 - as for each rpc call we have to define a "Request" message and a "Response" message.
 
-
-
+gRPC Bi Directional Streaming (BiDi)
+----------------------------------
+- Bi Directional streaming rpc api are a new kind api enabled thanks to http/2
+- the client will send many messages to the server and will receive many responses from the server
+- the number of requests and responses does not have to match
+- Bi directional streaming rpc are well suited for 
+	- when the client and the server needs to send a lot of data asynchonously
+	- chat protocol
+	- long running connections
+- in grpc Bi directional streaming api are defined using the keyword "stream", twice
+- as for each rpc call we have to define a "Request" message and a "Response" message.
