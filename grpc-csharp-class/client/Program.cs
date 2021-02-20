@@ -37,15 +37,33 @@ namespace client
             //var response = client.Greet(request);
             //Console.WriteLine(response.Result);
 
-            // Server streaming
-            var request = new GreetManyTimesRequest() { Greeting = greeting };
-            var response = client.GreatManyTimes(request);
 
-            while ( await response.ResponseStream.MoveNext())
+            // Server streaming
+            //var request = new GreetManyTimesRequest() { Greeting = greeting };
+            //var response = client.GreatManyTimes(request);
+
+            //while ( await response.ResponseStream.MoveNext())
+            //{
+            //    Console.WriteLine(response.ResponseStream.Current.Result);
+            //    await Task.Delay(200);
+            //}
+
+
+            // Client streaming
+            var request = new LongGreetRequest() { Greeting = greeting };
+            var stream = client.LongGreet();
+            foreach (int i in Enumerable.Range(1, 10))
             {
-                Console.WriteLine(response.ResponseStream.Current.Result);
-                await Task.Delay(200);
+                await stream.RequestStream.WriteAsync(request);
             }
+
+            await stream.RequestStream.CompleteAsync();
+
+            var response = stream.ResponseAsync;
+
+            Console.WriteLine(response.Result);
+
+
             //-------------------------------------
 
             channel.ShutdownAsync().Wait();
