@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using Sqrt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,21 @@ namespace client
                 if (task.Status == TaskStatus.RanToCompletion)
                     Console.WriteLine("The client connected sussesfully");
             });
+
+
+            var client = new SqrtService.SqrtServiceClient(channel);
+            int number = -1;
+
+            try
+            {
+                var response = client.sqrt(new SqrtRequest() { Number = number });
+                Console.WriteLine(response.SquareRoot);
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine("Error : " + e.Status.Detail);
+                throw;
+            }
 
 
 
