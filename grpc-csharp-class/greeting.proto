@@ -53,6 +53,6 @@ service GreetingService {
 	rpc LongGreet (stream LongGreetRequest) returns (LongGreetResponse) {}
 
 	// BiDi streaming
-	rpc GreatEveryone (stream GreetEveryoneRequest) return (stream GreetEveryoneResponse) {}
+	rpc GreatEveryone (stream GreetEveryoneRequest) returns (stream GreetEveryoneResponse) {}
 
 }
