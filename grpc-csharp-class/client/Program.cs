@@ -27,18 +27,19 @@ namespace client
             //con greeting.proto
             var client = new GreetingService.GreetingServiceClient(channel);
 
-            var greeting = new Greeting() {
-                FirstName = "Edison",
-                LastName = "Plaza"
-            };
+            //var greeting = new Greeting() {
+            //    FirstName = "Edison",
+            //    LastName = "Plaza"
+            //};
 
-            // Unary
+            //1. Unary
             //var request = new GreetingRequest() { Greeting = greeting };
             //var response = client.Greet(request);
             //Console.WriteLine(response.Result);
+            //-------------------------------------
 
 
-            // Server streaming
+            //2. Server streaming
             //var request = new GreetManyTimesRequest() { Greeting = greeting };
             //var response = client.GreatManyTimes(request);
 
@@ -47,22 +48,51 @@ namespace client
             //    Console.WriteLine(response.ResponseStream.Current.Result);
             //    await Task.Delay(200);
             //}
+            //-------------------------------------
 
 
-            // Client streaming
-            var request = new LongGreetRequest() { Greeting = greeting };
-            var stream = client.LongGreet();
-            foreach (int i in Enumerable.Range(1, 10))
+            //3. Client streaming
+            //var request = new LongGreetRequest() { Greeting = greeting };
+            //var stream = client.LongGreet();
+            //foreach (int i in Enumerable.Range(1, 10))
+            //{
+            //    await stream.RequestStream.WriteAsync(request);
+            //}
+
+            //await stream.RequestStream.CompleteAsync();
+
+            //var response = stream.ResponseAsync;
+
+            //Console.WriteLine(response.Result);
+
+
+            //4. BIDi
+            var stream = client.GreatEveryone();
+            var responseReaderTask = Task.Run(async () =>
             {
-                await stream.RequestStream.WriteAsync(request);
+                while(await stream.ResponseStream.MoveNext())
+                {
+                    Console.WriteLine("Received : " +  stream.ResponseStream.Current.Result);
+                }
+            });
+
+            Greeting[] greetings = {
+                new Greeting() { FirstName = "Edison", LastName="Plaza"},
+                new Greeting() { FirstName = "Lorena", LastName="Ochoa"},
+                new Greeting() { FirstName = "Maria C", LastName="Plaza"}
+            };
+
+            foreach (var greeting in greetings)
+            {
+                Console.WriteLine("Sending : " + greeting.ToString());
+                await stream.RequestStream.WriteAsync(new GreetEveryoneRequest()
+                {
+                    Greeting = greeting
+                });
             }
 
             await stream.RequestStream.CompleteAsync();
-
-            var response = stream.ResponseAsync;
-
-            Console.WriteLine(response.Result);
-
+            await responseReaderTask;
 
             //-------------------------------------
 
