@@ -1,4 +1,5 @@
-<<gRPC>>
+gRPC
+-------------------
 
 
 Protocol Buffer:
@@ -214,7 +215,7 @@ gRPC Bi Directional Streaming (BiDi)
 
 
 -------------------
-|Errors in gRPC
+Errors in gRPC
 -------------------
 Error codes
 -------------------
