@@ -1,3 +1,5 @@
+<<gRPC>>
+
 
 Protocol Buffer:
 - deinfe Messages (data, request and response)
@@ -210,7 +212,10 @@ gRPC Bi Directional Streaming (BiDi)
 --------------------------------------------------------------------
 --------------------------------------------------------------------
 
-* Errors in gRPC
+
+-------------------
+|Errors in gRPC
+-------------------
 Error codes
 -------------------
 - It is common for your api to sometimes return error codes
@@ -227,6 +232,17 @@ Error codes
 	http://avi.im/grpc-errors
 - if an application needs to return extra information on top of an error code, it can use the metadata context.
 
+-------------------
+gRPC Deadlines
+-------------------
+- Deadlines allow grpc clients to specify how long they are willing to wait for an rpc to complete before the rpc is
+  terminated with the DEADLINE_EXCEEDED
+- the grpc documentation recommends you set a deadline for all client rpc calls
+- setting the deadline is up to you: how long do you feel your api should have to complete ?
+- the server should check if the deadline has exceeded and cancel the work it is doing
+- this blog describes deadline in depth: https://grpc.io/blog/deadlines
+- Note: deadlines are propagated accoss if grpc call are chained
+- A => B => C (deadline for A is passed to B and then passed to C)
 
 
 
