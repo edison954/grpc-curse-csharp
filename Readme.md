@@ -171,4 +171,19 @@ Unary Api
 - for each rpc call we have to define a "Request" message and a "Response" message
 
 
+Server Streaming API
+----------------------------------
+- Server streaming rpc api are a new kind enabled thanks to http/2
+- The client will send one message to the server and will receive many responses
+  from the server; possibly an infinite number
+- Streaming Server are well suited for
+	- when the server needs to send a lot of data (big data)
+	- when the server needs to push data to the client without having the client request
+	  for more (think live feed, chat, etc)
+- In grpc serer streaming calls are defined using the keyword "stream"
+- as for each rpc call we have to define a "Request" message and a "Response" message.
+
+
+
+
 
