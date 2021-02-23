@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using Blog;
+using Grpc.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,8 +23,17 @@ namespace client
                     Console.WriteLine("The client connected sussesfully");
             });
 
+            var client = new BlogService.BlogServiceClient(channel);
+            var response = client.CreateBlog(new CreateBlogRequest() 
+            { 
+                Blog = new Blog.Blog() { 
+                    AuthorId = "Edison",
+                    Title = "New blog",
+                    Content = "Hellow world, this is a new blog"
+                }
+            });
 
-
+            Console.WriteLine("the blog " + response.Blog.Id + " was created !");
 
             channel.ShutdownAsync().Wait();
             Console.ReadKey();
