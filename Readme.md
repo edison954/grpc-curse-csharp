@@ -271,3 +271,32 @@ What is SSL?
 
 
 
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Language interoperability
+-------------------
+- Becouse the code can be generated for any language, ti makes it super simple to created micro-services in any
+  language that interact with each other
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+gRPC Reflection & CLI
+-------------------
+- for clients to connect to our server, they need to have .proto file which defines the service
+- this is fine for production (you definitely want to know the api definition in advance)
+- for development, when you have a grpc server you don't know, sometimes you wish you could ask the server:
+	whats apis do you have?
+
+- that's reflection
+- we may want reflection for two reasons:
+	- having servers "expose" which endpoints are available
+	- allowing command line interfaces (cli) to talk to our server without have preliminary .proto file
+	
+
+
+
+
+
