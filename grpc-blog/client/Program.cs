@@ -38,23 +38,87 @@ namespace client
             //Console.WriteLine("the blog " + response.Blog.Id + " was created !");
 
             //2. Read
-            try
-            {
-                var response = client.ReadBlog(new ReadBlogRequest()
-                {
-                    BlogId = "60348bf79d7fbea245ac5bcc"
-                }); ;
-                Console.WriteLine(response.Blog.ToString());
-            }
-            catch (RpcException e)
-            {
-                Console.WriteLine(e.Status.Detail);
-            }
+            //try
+            //{
+            //    var response = client.ReadBlog(new ReadBlogRequest()
+            //    {
+            //        BlogId = "60348bf79d7fbea245ac5bcc"
+            //    }); ;
+            //    Console.WriteLine(response.Blog.ToString());
+            //}
+            //catch (RpcException e)
+            //{
+            //    Console.WriteLine(e.Status.Detail);
+            //}
+
+
+            var newBlog = CreateBlog(client);
+            //ReadBlog(client);
+
+            UpdateBlog(client, newBlog);
+            //DeleteBlog(client, newBlog);
 
 
 
             channel.ShutdownAsync().Wait();
             Console.ReadKey();
         }
+
+        private static Blog.Blog CreateBlog(BlogService.BlogServiceClient client)
+        {
+            var response = client.CreateBlog(new CreateBlogRequest()
+            {
+                Blog = new Blog.Blog()
+                {
+                    AuthorId = "Edison",
+                    Title = "New blog",
+                    Content = "Hellow world, this is a new blog"
+                }
+            });
+
+            Console.WriteLine("The blog " + response.Blog.Id + " was created!");
+
+            return response.Blog;
+        }
+
+        private static void ReadBlog(BlogService.BlogServiceClient client)
+        {
+            try
+            {
+                var response = client.ReadBlog(new ReadBlogRequest()
+                {
+                    BlogId = "60348bf79d7fbea245ac5bcc"
+                });
+
+                Console.WriteLine(response.Blog.ToString());
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine(e.Status.Detail);
+            }
+        }
+
+        private static void UpdateBlog(BlogService.BlogServiceClient client, Blog.Blog blog)
+        {
+            try
+            {
+                blog.AuthorId = "Maria camila";
+                blog.Title = "Blog de cami";
+                blog.Content = "barbies y muñecos";
+
+                var response = client.UpdateBlog(new UpdateBlogRequest()
+                {
+                    Blog = blog
+                });
+
+                Console.WriteLine(response.Blog.ToString());
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine(e.Status.Detail);
+            }
+        }
+
+
     }
 }
