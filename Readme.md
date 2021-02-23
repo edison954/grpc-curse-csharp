@@ -247,3 +247,27 @@ gRPC Deadlines
 
 
 
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+-------------------
+SSL Encryption in gRPC
+-------------------
+- In production grpc calls should be running with encryption enabled
+- This is done by generating SSL certificates
+- SSL allows communication to be secure end-to-end and ensuring no Man in the middle attack can be performed
+
+The need for SSL Encryption
+- When you communicate over the internet, your data is visible by all servers that transfer your package
+- Any router in the middle can view the packages you're sending using plaintext
+- its not secure enough when the data is sensitive
+
+- SSL allow clients and servers to encrypt packet
+- SSL enables clients and servers to securely exchanges data
+- Routers cannot view the content of the internet packets
+
+What is SSL?
+- TLS (Transport Layer Security), successro of SS, encrypts the connection between 2 endpoints for secure data exchange
+
+
+
