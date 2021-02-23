@@ -294,7 +294,7 @@ gRPC Reflection & CLI
 - we may want reflection for two reasons:
 	- having servers "expose" which endpoints are available
 	- allowing command line interfaces (cli) to talk to our server without have preliminary .proto file
-	
+https://github.com/grpc/grpc/blob/master/doc/csharp/server_reflection.md	
 
 
 
