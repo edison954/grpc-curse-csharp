@@ -90,5 +90,19 @@ namespace server
 
         }
 
+        public override Task<DeleteBlogResponse> DeleteBlog(DeleteBlogRequest request, ServerCallContext context)
+        {
+            var blogId = request.BlogId;
+            var filter = new FilterDefinitionBuilder<BsonDocument>().Eq("_id", new ObjectId(blogId));
+
+            var result = mongoCollection.DeleteOne(filter);
+
+            if (result.DeletedCount == 0)
+                throw new RpcException(new Status(StatusCode.NotFound, "The blog id " + blogId + " wasn´t find"));
+
+            return Task.FromResult(new DeleteBlogResponse() { BlogId=blogId });
+
+        }
+
     }
 }
