@@ -62,5 +62,33 @@ namespace server
         }
 
 
+        public override Task<UpdateBlogResponse> UpdateBlog(UpdateBlogRequest request, ServerCallContext context)
+        {
+
+            var blogId = request.Blog.Id;
+            var filter = new FilterDefinitionBuilder<BsonDocument>().Eq("_id", new ObjectId(blogId));
+            var result = mongoCollection.Find(filter).FirstOrDefault();
+
+            if (result == null)
+                throw new RpcException(new Status(StatusCode.NotFound, "The blog id " + blogId + " wasn´t find"));
+
+            var doc = new BsonDocument("author_id", request.Blog.AuthorId)
+                                        .Add("title", request.Blog.Title)
+                                        .Add("content", request.Blog.Content);
+
+            mongoCollection.ReplaceOne(filter, doc);
+
+            var blog = new Blog.Blog()
+            {
+                AuthorId = doc.GetValue("author_id").AsString,
+                Title = doc.GetValue("title").AsString,
+                Content = doc.GetValue("content").AsString
+            };
+            blog.Id = blogId;
+
+            return Task.FromResult( new UpdateBlogResponse() { Blog = blog });
+
+        }
+
     }
 }

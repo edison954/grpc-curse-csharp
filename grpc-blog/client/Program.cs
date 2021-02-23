@@ -24,16 +24,34 @@ namespace client
             });
 
             var client = new BlogService.BlogServiceClient(channel);
-            var response = client.CreateBlog(new CreateBlogRequest() 
-            { 
-                Blog = new Blog.Blog() { 
-                    AuthorId = "Edison",
-                    Title = "New blog",
-                    Content = "Hellow world, this is a new blog"
-                }
-            });
 
-            Console.WriteLine("the blog " + response.Blog.Id + " was created !");
+
+            //1. Create
+            //var response = client.CreateBlog(new CreateBlogRequest() 
+            //{ 
+            //    Blog = new Blog.Blog() { 
+            //        AuthorId = "Edison",
+            //        Title = "New blog",
+            //        Content = "Hellow world, this is a new blog"
+            //    }
+            //});
+            //Console.WriteLine("the blog " + response.Blog.Id + " was created !");
+
+            //2. Read
+            try
+            {
+                var response = client.ReadBlog(new ReadBlogRequest()
+                {
+                    BlogId = "60348bf79d7fbea245ac5bcc"
+                }); ;
+                Console.WriteLine(response.Blog.ToString());
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine(e.Status.Detail);
+            }
+
+
 
             channel.ShutdownAsync().Wait();
             Console.ReadKey();
