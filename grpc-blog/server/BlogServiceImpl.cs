@@ -104,5 +104,25 @@ namespace server
 
         }
 
+        public override async Task ListBlog(ListBlogRequest request, IServerStreamWriter<ListBlogResponse> responseStream, ServerCallContext context)
+        {
+            var filter = new FilterDefinitionBuilder<BsonDocument>().Empty;
+            var result = mongoCollection.Find(filter);
+
+            foreach (var item in result.ToList())
+            {
+                await responseStream.WriteAsync(new ListBlogResponse()
+                {
+                    Blog = new Blog.Blog()
+                    {
+                        Id = item.GetValue("_id").ToString(),
+                        AuthorId = item.GetValue("author_id").AsString,
+                        Content = item.GetValue("content").AsString,
+                        Title = item.GetValue("title").AsString
+                    }
+                });
+            }
+        }
+
     }
 }
