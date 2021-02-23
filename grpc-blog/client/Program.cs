@@ -56,9 +56,9 @@ namespace client
             //ReadBlog(client);
 
             //UpdateBlog(client, newBlog);
-            DeleteBlog(client, newBlog);
+            //DeleteBlog(client, newBlog);
 
-
+            await ListBlog(client);
 
             channel.ShutdownAsync().Wait();
             Console.ReadKey();
@@ -130,6 +130,16 @@ namespace client
             catch (RpcException e)
             {
                 Console.WriteLine(e.Status.Detail);
+            }
+        }
+
+        private static async Task ListBlog(BlogService.BlogServiceClient client)
+        {
+            var response = client.ListBlog(new ListBlogRequest() { });
+
+            while (await response.ResponseStream.MoveNext())
+            {
+                Console.WriteLine(response.ResponseStream.Current.Blog.ToString());
             }
         }
 
